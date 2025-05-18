@@ -1,22 +1,21 @@
 package org.example.objects;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
 import org.example.objects.DTO.UserDTO;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
+import java.util.UUID;
 
-@Document
-@Getter
-@Setter
+@Entity
+@Table(name = "db_user")
 public class User{
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     private String name;
     private String password;
 
-    public User(String id, String name, String password){
+    public User(UUID id, String name, String password){
         this.id = id;
         this.name = name;
         this.password = password;
@@ -30,7 +29,7 @@ public class User{
 
     public User(){}
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -42,7 +41,7 @@ public class User{
         return password;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

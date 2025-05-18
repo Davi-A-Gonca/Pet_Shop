@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PaymentService {
@@ -20,7 +21,7 @@ public class PaymentService {
         return payment;
     }
 
-    public Optional<Payment> findById(String id){
+    public Optional<Payment> findById(UUID id){
         return repository.findById(id);
     }
 
@@ -28,7 +29,7 @@ public class PaymentService {
         return repository.findAll();
     }
 
-    public void deleteById(String id){
+    public void deleteById(UUID id){
         repository.deleteById(id);
     }
 

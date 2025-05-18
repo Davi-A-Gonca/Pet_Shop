@@ -1,16 +1,29 @@
 package org.example.objects;
 
+import jakarta.persistence.*;
 import org.example.objects.DTO.OrderDTO;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
+@Entity
+@Table(name = "db_orders")
 public class Order {
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(name="nameOfCustomer")
     private String nameOfCustomer;
+
+    @Column(name="totalProducts")
     private int totalProducts;
+
+    @Column(name="totalPrice")
     private BigDecimal totalPrice;
 
-    public Order(String id, String nameOfCustomer,
+    public Order(UUID id, String nameOfCustomer,
                  int totalProducts, BigDecimal totalPrice){
         this.id = id;
         this.nameOfCustomer = nameOfCustomer;
@@ -27,7 +40,7 @@ public class Order {
 
     public Order(){}
 
-    public String getId() { return id; }
+    public UUID getId() { return id; }
 
     public String getNameOfCustomer() { return nameOfCustomer; }
 
@@ -39,7 +52,7 @@ public class Order {
         return totalPrice;
     }
 
-    public void setId(String id) { this.id = id; }
+    public void setId(UUID id) { this.id = id; }
 
     public void setNameOfCustomer(String nameOfCustomer) {
         this.nameOfCustomer = nameOfCustomer;

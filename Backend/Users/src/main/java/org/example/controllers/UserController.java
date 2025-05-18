@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 public class UserController {
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping(Constants.API_USER + "/{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable("id") String id){
+    public ResponseEntity<Optional<User>> findById(@PathVariable("id") UUID id){
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -43,7 +44,7 @@ public class UserController {
     }
 
     @DeleteMapping(Constants.API_USER + "/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable("id") String id){
+    public ResponseEntity<Void> deleteById(@PathVariable("id") UUID id){
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }

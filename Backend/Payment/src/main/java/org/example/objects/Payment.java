@@ -1,19 +1,25 @@
 package org.example.objects;
 
+import jakarta.persistence.*;
 import org.example.objects.DTO.PaymentDTO;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
+@Entity
+@Table(name = "db_payment")
 public class Payment {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     private String formOfPayment;
     private String nameOfCustomer;
     private int totalProducts;
     private BigDecimal totalPrice;
     private boolean paid;
 
-    public Payment(String id, String formOfPayment, String nameOfCustomer,
+    public Payment(UUID id, String formOfPayment, String nameOfCustomer,
                    int totalProducts, BigDecimal totalPrice, boolean paid){
         this.id = id;
         this.formOfPayment = formOfPayment;
@@ -42,7 +48,7 @@ public class Payment {
 
     public BigDecimal getTotalPrice() { return totalPrice; }
 
-    public String getId() { return id; }
+    public UUID getId() { return id; }
 
     public boolean isPaid() { return paid; }
 
@@ -52,7 +58,7 @@ public class Payment {
 
     public void setTotalProducts(int totalProducts) { this.totalProducts = totalProducts; }
 
-    public void setId(String id) { this.id = id; }
+    public void setId(UUID id) { this.id = id; }
 
     public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }
 

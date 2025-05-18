@@ -1,7 +1,9 @@
 package org.example.objects.DTO;
 
+import java.util.UUID;
+
 public class UserDTO{
-    private String id;
+    private UUID id;
     private String name;
     private String password;
 
@@ -13,11 +15,11 @@ public class UserDTO{
         return password;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

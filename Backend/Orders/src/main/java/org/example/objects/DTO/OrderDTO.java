@@ -4,16 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class OrderDTO {
-    private String id;
+    private UUID id;
     private String nameOfCustomer;
     private int totalProducts;
     private BigDecimal totalPrice;
 
-    public String getId() { return id; }
+    public UUID getId() { return id; }
 
     public String getNameOfCustomer() { return nameOfCustomer; }
 
@@ -25,7 +26,7 @@ public class OrderDTO {
         return totalPrice;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
