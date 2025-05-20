@@ -1,15 +1,17 @@
 package org.example.objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.objects.DTO.PortionDTO;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-@Document
+@Entity
 @Getter
 @Setter
+@Table(name = "db_portion")
 public class Portion extends Consumables{
 
     public Portion(String name, String type, String description,

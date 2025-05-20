@@ -1,0 +1,36 @@
+services:
+  mysql_users_container:
+    image: mysql:8.0
+    container_name: mysql_users_container
+    restart: always
+    environment:
+      MYSQL_DATABASE: db_user
+      MYSQL_ROOT_PASSWORD: root123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: java_users_app
+    depends_on:
+      mysql_users_container:
+        condition: service_healthy
+    ports:
+      - "8083:8083"
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
