@@ -32,6 +32,8 @@ public class Consumables implements Products {
         availability = dto.isAvailability();
     }
 
+    public Consumables(){}
+
     public String getName() {
         return name;
     }
