@@ -4,16 +4,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class ConsumableDTO {
+    private UUID id;
     private String name;
     private String type;
     private String description;
     private BigDecimal price;
     private BigDecimal weight;
     private boolean availability;
+
+    public UUID getId(){return id;}
 
     public String getName() { return name; }
 
@@ -26,6 +30,8 @@ public class ConsumableDTO {
     public BigDecimal getWeight() { return weight; }
 
     public boolean isAvailability() { return availability; }
+
+    public void setId(UUID id){this.id = id;}
 
     public void setName(String name) { this.name = name; }
 

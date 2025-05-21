@@ -14,14 +14,9 @@ import java.util.UUID;
 @Table(name = "db_bird_food")
 public class BirdFood extends Consumables{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
     public BirdFood(UUID id, String name, String type, String description,
                     BigDecimal price, BigDecimal weight, boolean availability){
-        super(name, type, description, price, weight, availability);
-        this.id = id;
+        super(id, name, type, description, price, weight, availability);
     }
 
     public BirdFood(BirdFoodDTO dto){
@@ -30,8 +25,9 @@ public class BirdFood extends Consumables{
 
     public BirdFood(){}
 
+    @Override
     public UUID getId() {
-        return id;
+        return super.getId();
     }
 
     @Override
@@ -65,7 +61,7 @@ public class BirdFood extends Consumables{
     }
 
     public void setId(UUID id) {
-        this.id = id;
+        super.setId(id);
     }
 
     @Override

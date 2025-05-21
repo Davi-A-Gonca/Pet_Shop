@@ -1,20 +1,41 @@
 package org.example.objects;
 
+import jakarta.persistence.*;
 import org.example.Products;
 import org.example.objects.DTO.ConsumableDTO;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Consumables implements Products {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(name="nameOfProduct")
     private String name;
+
+    @Column(name="typeOfProduct")
     private String type;
+
+    @Column(name="description")
     private String description;
+
+    @Column(name="price")
     private BigDecimal price;
+
+    @Column(name="wheight")
     private BigDecimal weight;
+
+    @Column(name="productIsAvaliable")
     private boolean availability;
 
-    public Consumables(String name, String type, String description,
+    public Consumables(UUID id, String name, String type, String description,
                        BigDecimal price, BigDecimal weight, boolean availability){
+        this.id = id;
         this.name = name;
         this.type = type;
         this.description = description;
@@ -24,6 +45,7 @@ public class Consumables implements Products {
     }
 
     public Consumables(ConsumableDTO dto){
+        id = dto.getId();
         name = dto.getName();
         type = dto.getType();
         description = dto.getDescription();
@@ -33,6 +55,8 @@ public class Consumables implements Products {
     }
 
     public Consumables(){}
+
+    public UUID getId(){return id;}
 
     public String getName() {
         return name;
@@ -57,6 +81,8 @@ public class Consumables implements Products {
     public boolean isAvailability() {
         return availability;
     }
+
+    public void setId(UUID id){this.id = id;}
 
     public void setName(String name) {
         this.name = name;
