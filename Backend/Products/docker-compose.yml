@@ -1,13 +1,13 @@
 services:
-  mysql_payment_container:
+  mysql_products_container:
     image: mysql:8.0
-    container_name: mysql_payment_container
+    container_name: mysql_products_container
     restart: always
     environment:
-      MYSQL_DATABASE: db_payment
+      MYSQL_DATABASE: db_products
       MYSQL_ROOT_PASSWORD: root123
     ports:
-      - "3307:3307"
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -20,12 +20,12 @@ services:
 
   app:
     build: .
-    container_name: java_payment_app
+    container_name: java_products_app
     depends_on:
-      mysql_payment_container:
+      mysql_products_container:
         condition: service_healthy
     ports:
-      - "8081:8081"
+      - "8080:8080"
     networks:
       - app-network
 
