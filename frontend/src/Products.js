@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 
-const API_URL = "http://localhost:8080/projeto/api/v1/product";
+const API_URL = "http://localhost:8080/projeto/api/v1/dogFood";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -130,6 +130,10 @@ function Products() {
       console.error("Erro de rede:", error);
     }
   };
+
+  const handleBuy = async() => {
+    
+  }
 
   return (
     <div className="bg-dark min-vh-100">
@@ -267,7 +271,6 @@ function Products() {
                 <table className="table table-dark table-striped table-hover"> {/* Melhorias visuais na tabela */}
                     <thead>
                         <tr className='text-white text-center'>
-                            <th>ID</th>
                             <th>Nome</th>
                             <th>Tipo</th>
                             <th>Descrição</th>
@@ -275,12 +278,12 @@ function Products() {
                             <th>Peso</th>
                             <th>Disponibilidade</th>
                             <th>Ações</th>
+                            <th>Comprar</th>
                         </tr>
                     </thead>
                     <tbody>
                         {products.map((product) => (
                             <tr key={product.id}>
-                                <td>{product.id}</td>
                                 <td>{product.name}</td>
                                 <td>{product.type}</td>
                                 <td>{product.description}</td>
@@ -296,6 +299,11 @@ function Products() {
                                             <span role="img" aria-label="Excluir">🗑️</span>
                                         </button>
                                     </div>
+                                </td>
+                                <td>
+                                  <button className="btn btn-info" onClick={handleBuy} >
+                                    🛒 Comprar
+                                  </button>
                                 </td>
                             </tr>
                         ))}
