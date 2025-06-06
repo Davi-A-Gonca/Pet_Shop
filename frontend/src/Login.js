@@ -1,8 +1,10 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const API_URL = "http://localhost:8083/projeto/api/v1/user";
+const API_URL = "http://localhost:8083/projeto/api/v1/";
+const SIGNIN = API_URL + "user";
+const LOGIN = API_URL + "login";
 
 function Login() {
   const [users, setUsers] = useState([]);
@@ -10,10 +12,12 @@ function Login() {
     name: "",
     password: ""});
   const [signin, setSignin] = useState(null);
-  const [loginMessage, setloginMessage] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-  fetch(API_URL)
+  fetch(SIGNIN)
     .then((res) => res.json()) 
     .then((data) => setUsers(data))
     .catch((error) => console.error("Erro ao buscar usuários:", error)); // Adicionado tratamento de erro
@@ -22,22 +26,31 @@ function Login() {
   const handleLogin = async () => {
     const newUser = form;
     const method = "POST";
-    var currentUsers = [];
 
-    setloginMessage("");
+    setLoginMessage("");
 
-    const response = await fetch(API_URL, {
-      method,
-      headers: {"Content-Type" : "application/json"},
-      body: JSON.stringify(newUser),
-    });
+    console.log(JSON.stringify(newUser));
 
-    if(response.ok){
-      currentUsers = await response.json();
-      
-    }else {
-      console.error("Erro ao carregar usuários para login:", response.statusText);
-      return;
+    const response = await fetch(LOGIN, 
+      {
+        method,
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify(newUser)
+      }
+    );
+    
+    try{
+      if(response.ok){
+        setLoginMessage("AAAAAAAAAAAAAAAAA");
+        navigate('/produtos');
+      }else {
+        console.error("Erro ao carregar usuários para login:", response.statusText);
+        setLoginMessage(response.statusText);
+        return;
+      }
+    }catch (e){
+      console.error("Erro ao Efetuar Login:\n", e);
+      setLoginMessage("Não foi possível conectar ao servidor. Verifique sua conexão ou a API.");
     }
   };
 
@@ -45,17 +58,29 @@ function Login() {
     const newUser = form;
     const method = "POST";
 
-    const response = await fetch(API_URL, {
+    const response = await fetch(SIGNIN, {
       method,
       headers: {"Content-Type" : "application/json"},
     });
 
     if(response.ok){
+      setLoginMessage("AAAAAAAAAAAAAAAAA");
       setUsers(
         [...users, newUser]
       );
 
-      setForm({name: "", password: ""});
+      setForm({name: "", password: ""}); 
+    }else{
+      console.error("Erro ao carregar usuários para login:", response);
+      setLoginMessage(response);
+    }
+  };
+
+  const alternateSignIn = async () => {
+    if(!signin){
+      setSignin(1);
+    }else{
+      setSignin(null);
     }
   };
 
@@ -73,17 +98,18 @@ function Login() {
         </p>
 
         <div className='container mt-3'>
-          <div class="form-floating mb-3 mt-3">
-            <input class="form-control" type='text' placeholder='Nome' value={form.nome} onChange={(e) => setForm({...form, nome: e.target.value})}/><br/>
+          <div className="form-floating mb-3 mt-3">
+            <input className="form-control" type='text' placeholder='Nome' value={form.name} onChange={(e) => setForm({...form, name: e.target.value})}/><br/>
             <label for="nome">Nome</label>
           </div>
           
-          <div class="form-floating mb-3 mt-3">
-            <input class="form-control" type='password' placeholder='password' value={form.password} onChange={(e) => setForm({...form, password: e.target.value})}/><br/>
+          <div className="form-floating mb-3 mt-3">
+            <input className="form-control" type='password' placeholder='password' value={form.password} onChange={(e) => setForm({...form, password: e.target.value})}/><br/>
+            <p className='text-white' onClick={alternateSignIn}>{signin ? "Login" : "Inscreva-se"}</p>
             <label for="password">Senha</label>
           </div>
           
-          <button button type="button" class="btn btn-primary" onClick={signin ? handleSignIn : handleLogin}>
+          <button button type="button" className="btn btn-primary" onClick={signin ? handleSignIn : handleLogin}>
             {signin ? "Cadastro" : "Login"}
           </button>
         </div>
@@ -93,9 +119,6 @@ function Login() {
         </p>
 
       </div>
-
-      <p className='text-white' onClick={setSignin}>Inscreva-se</p>
-
     </div>
   );
 }

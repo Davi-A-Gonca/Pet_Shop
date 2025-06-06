@@ -56,6 +56,7 @@ public class UserController {
 
         for (User u : users){
             if (Objects.equals(u.getName(), dto.getName()) && Objects.equals(u.getPassword(), dto.getPassword())){
+                System.out.println("Usuário " + dto.getName() + " efetuou Login com Sucesso!!!");
                 return ResponseEntity.ok(true);
             }
         }
