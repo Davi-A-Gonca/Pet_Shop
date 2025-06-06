@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,5 +48,18 @@ public class UserController {
     public ResponseEntity<Void> deleteById(@PathVariable("id") UUID id){
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(Constants.LOGIN)
+    public ResponseEntity<Boolean> login(@RequestBody UserDTO dto){
+        List<User> users = service.findAll();
+
+        for (User u : users){
+            if (Objects.equals(u.getName(), dto.getName()) && Objects.equals(u.getPassword(), dto.getPassword())){
+                return ResponseEntity.ok(true);
+            }
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }
