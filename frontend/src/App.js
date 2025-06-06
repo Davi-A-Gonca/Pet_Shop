@@ -1,24 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+// Importe os componentes das suas páginas
+import Login from './Login';
+import Produtos from './Products';
+import Pedidos from './Shop';
+import Pagamento from './Payment';
+
+// Componente da Página Inicial
+const HomePage = () => (
+  <div>
+    <h1>Bem-vindo à Loja Online!</h1>
+    <p>Escolha uma opção:</p>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/login">Ir para Login</Link>
+        </li>
+        <li>
+          <Link to="/produtos">Ver Produtos</Link>
+        </li>
+        <li>
+          <Link to="/pedidos">Meus Pedidos</Link>
+        </li>
+        <li>
+          <Link to="/pagamento">Fazer Pagamento</Link>
+        </li>
+      </ul>
+    </nav>
+  </div>
+);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style={{ padding: '20px' }}>
+        <Routes>
+          {/* Rota para a Página Inicial */}
+          <Route path="/" element={<HomePage />} />
+
+          {/* Rotas para as outras páginas */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/produtos" element={<Produtos />} />
+          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/pagamento" element={<Pagamento />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
