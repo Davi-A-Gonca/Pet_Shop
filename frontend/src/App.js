@@ -9,14 +9,32 @@ import Pagamento from './Payment';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/produtos" element={<Produtos />} />
-        <Route path="/pedidos" element={<Pedidos />} />
-        <Route path="/pagamento" element={<Pagamento />} />
-      </Routes>
-    </Router>
+    <div>
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css"/> 
+
+      <Router>
+        <nav class="w3-bar w3-purple">
+          <div href="#" class="w3-bar-item w3-button">
+            <Link to="/">Login</Link>
+          </div>
+          <div href="#" class="w3-bar-item w3-button">
+            <Link to="/produtos">Produtos</Link>
+          </div>
+          <div href="#" class="w3-bar-item w3-button">
+            <Link to="/pedidos">Pedidos</Link>
+          </div>
+          <div href="#" class="w3-bar-item w3-button">
+            <Link to="/pagamento">Pagamento</Link>
+          </div>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/produtos" element={<Produtos />} />
+          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/pagamento" element={<Pagamento />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

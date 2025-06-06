@@ -1,21 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 
 const API_URL = "http://localhost:8081/projeto/api/v1/payment";
 
 function Payment() {
+  const location = useLocation();
+  const dadosRecebidos = location.state;
+
   const [payments, setPayments] = useState([]);
   const [form, setForm] = useState({
     formOfPayment: "",
-    nameOfCustomer: "",
-    totalProducts: 0,
-    totalPrice: 0.0, // Inicializa como número
+    nameOfCustomer: dadosRecebidos.name,
+    totalProducts: dadosRecebidos.quantity,
+    totalPrice: dadosRecebidos.price, // Inicializa como número
     paid: false
   });
   const [editionId, setEditionId] = useState(null);
   const [message, setMessage] = useState("");
+
+  const paymentData = useState;
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -174,6 +180,8 @@ function Payment() {
               onChange={handleChange}
               id='nameOfCustomer'
               required
+              readOnly
+              disabled
             />
             <label htmlFor="nameOfCustomer">Nome do Cliente</label>
           </div>
@@ -190,6 +198,8 @@ function Payment() {
               id='totalProducts'
               required
               min="0"
+              readOnly
+              disabled
             />
             <label htmlFor="totalProducts">Total de Produtos</label>
           </div>
@@ -207,22 +217,10 @@ function Payment() {
               id='totalPrice'
               required
               min="0"
+              readOnly
+              disabled
             />
             <label htmlFor="totalPrice">Preço Total (R$)</label>
-          </div>
-
-          {/* Pago (Checkbox) */}
-          <div className="form-check form-switch mb-3 text-start">
-            <input
-              className="form-check-input"
-              type='checkbox'
-              role='switch'
-              name='paid'
-              checked={form.paid}
-              onChange={handleChange}
-              id='paid'
-            />
-            <label className="form-check-label text-white" htmlFor="paid">Pagamento Efetuado</label>
           </div>
 
           {/* Mensagens de feedback */}

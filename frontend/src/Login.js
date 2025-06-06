@@ -38,11 +38,12 @@ function Login() {
         body: JSON.stringify(newUser)
       }
     );
+
+    console.log("Nome: " + newUser.name);
     
     try{
       if(response.ok){
-        setLoginMessage("AAAAAAAAAAAAAAAAA");
-        navigate('/produtos');
+        navigate('/produtos', { state: newUser.name });
       }else {
         console.error("Erro ao carregar usuários para login:", response.statusText);
         setLoginMessage(response.statusText);
