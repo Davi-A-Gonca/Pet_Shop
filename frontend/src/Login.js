@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 const API_URL = "http://localhost:8083/projeto/api/v1/user";
 
@@ -8,7 +9,7 @@ function Login() {
   const [form, setForm] = useState({
     name: "",
     password: ""});
-  const [login, setLogin] = useState(null);
+  const [signin, setSignin] = useState(null);
   const [loginMessage, setloginMessage] = useState("");
 
   useEffect(() => {
@@ -42,7 +43,7 @@ function Login() {
 
   const handleSignIn = async () => {
     const newUser = form;
-    const method = "GET";
+    const method = "POST";
 
     const response = await fetch(API_URL, {
       method,
@@ -68,7 +69,7 @@ function Login() {
       <div className="container-fluid p-5 text-center">
 
         <p className='h1 text-white'>
-          {login ? "Login" : "Cadastro"}
+          {signin ? "Cadastro" : "Login"}
         </p>
 
         <div className='container mt-3'>
@@ -82,8 +83,8 @@ function Login() {
             <label for="password">Senha</label>
           </div>
           
-          <button button type="button" class="btn btn-primary" onClick={login ? handleSignIn : handleLogin}>
-            {login ? "Cadastro" : "Login"}
+          <button button type="button" class="btn btn-primary" onClick={signin ? handleSignIn : handleLogin}>
+            {signin ? "Cadastro" : "Login"}
           </button>
         </div>
 
@@ -92,6 +93,8 @@ function Login() {
         </p>
 
       </div>
+
+      <p className='text-white' onClick={setSignin}>Inscreva-se</p>
 
     </div>
   );
