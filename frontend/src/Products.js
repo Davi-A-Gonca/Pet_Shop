@@ -2,8 +2,8 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const API_URL = "http://localhost:8080/projeto/api/v1/dogFood";
-const ORDER = "http://localhost:8082/projeto/api/v1/order;";
+const API_URL = "http://10.4.230.10:8081/projeto/api/v1/dogFood";
+const ORDER = "http://10.4.230.10:8082/projeto/api/v1/order;";
 
 function Products() {
   const location = useLocation();

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 
-const API_URL = "http://localhost:8081/projeto/api/v1/payment";
+const API_URL = "http://10.4.230.10:8081/projeto/api/v1/payment";
 
 function Payment() {
   const location = useLocation();

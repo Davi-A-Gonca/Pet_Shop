@@ -2,7 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = "http://localhost:8083/projeto/api/v1/";
+const API_URL = "http://10.4.230.10:8083/projeto/api/v1/user";
 const SIGNIN = API_URL + "user";
 const LOGIN = API_URL + "login";
 

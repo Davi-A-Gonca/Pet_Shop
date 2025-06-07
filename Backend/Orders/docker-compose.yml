@@ -4,8 +4,10 @@ services:
     container_name: mysql_orders_container
     restart: always
     environment:
-      MYSQL_DATABASE: db_orders
-      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: 'db_orders'
+      MYSQL_USER: 'uniara'
+      MYSQL_PASSWORD: 'uniara'
+      MYSQL_ROOT_PASSWORD: '1234'
     ports:
       - "3309:3306"
     volumes:
@@ -23,8 +25,8 @@ services:
     container_name: java_orders_app
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_orders_container:3306/db_orders?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: 'root'
-      SPRING_DATASOURCE_PASSWORD: '1234'
+      SPRING_DATASOURCE_USERNAME: 'uniara'
+      SPRING_DATASOURCE_PASSWORD: 'uniara'
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
     depends_on:
       mysql_orders_container:

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
 
-const API_URL = "http://localhost:8081/projeto/api/v1/payment";
+const API_URL = "http://10.4.230.10:8081/projeto/api/v1/payment";
 
 function Shop() {
   const [items, setItems] = useState([]);

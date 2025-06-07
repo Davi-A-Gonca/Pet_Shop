@@ -4,12 +4,15 @@ services:
     container_name: mysql_products_container
     restart: always
     environment:
-      MYSQL_DATABASE: db_products
-      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: 'db_products'
+      MYSQL_USER: 'uniara'
+      MYSQL_PASSWORD: 'uniara'
+      MYSQL_ROOT_PASSWORD: '1234'
     ports:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
     healthcheck:
@@ -27,8 +30,8 @@ services:
       - app-network
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_products_container:3306/db_products?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: 'root'
-      SPRING_DATASOURCE_PASSWORD: '1234'
+      SPRING_DATASOURCE_USERNAME: 'uniara'
+      SPRING_DATASOURCE_PASSWORD: 'uniara'
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
     depends_on:
       mysql_products_container:
