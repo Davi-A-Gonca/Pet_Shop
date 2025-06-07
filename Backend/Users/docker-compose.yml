@@ -4,10 +4,15 @@ services:
     container_name: mysql_users_container
     restart: always
     environment:
+<<<<<<< HEAD
       MYSQL_DATABASE: 'db_user'
       MYSQL_USER: 'uniara'
       MYSQL_PASSWORD: 'uniara'
       MYSQL_ROOT_PASSWORD: '1234'
+=======
+      MYSQL_DATABASE: db_user
+      MYSQL_ROOT_PASSWORD: 1234
+>>>>>>> aa1ec23def88151d618ce1c8f5893cb868df16a8
     ports:
       - "3310:3306"
     volumes:
