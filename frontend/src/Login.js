@@ -2,7 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = "http://10.4.230.10:8083/projeto/api/v1/user";
+const API_URL = "http://localhost:8083/projeto/api/v1/";
 const SIGNIN = API_URL + "user";
 const LOGIN = API_URL + "login";
 
@@ -62,6 +62,7 @@ function Login() {
     const response = await fetch(SIGNIN, {
       method,
       headers: {"Content-Type" : "application/json"},
+      body: JSON.stringify(newUser)
     });
 
     if(response.ok){
@@ -73,7 +74,8 @@ function Login() {
       setForm({name: "", password: ""}); 
     }else{
       console.error("Erro ao carregar usuários para login:", response);
-      setLoginMessage(response);
+      const text = await response.text(); // ou .json() dependendo do retorno
+      setLoginMessage(text);
     }
   };
 
@@ -101,16 +103,16 @@ function Login() {
         <div className='container mt-3'>
           <div className="form-floating mb-3 mt-3">
             <input className="form-control" type='text' placeholder='Nome' value={form.name} onChange={(e) => setForm({...form, name: e.target.value})}/><br/>
-            <label for="nome">Nome</label>
+            <label htmlFor="nome">Nome</label>
           </div>
           
           <div className="form-floating mb-3 mt-3">
             <input className="form-control" type='password' placeholder='password' value={form.password} onChange={(e) => setForm({...form, password: e.target.value})}/><br/>
             <p className='text-white' onClick={alternateSignIn}>{signin ? "Login" : "Inscreva-se"}</p>
-            <label for="password">Senha</label>
+            <label htmlFor="password">Senha</label>
           </div>
           
-          <button button type="button" className="btn btn-primary" onClick={signin ? handleSignIn : handleLogin}>
+          <button type="button" className="btn btn-primary" onClick={signin ? handleSignIn : handleLogin}>
             {signin ? "Cadastro" : "Login"}
           </button>
         </div>

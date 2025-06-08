@@ -2,8 +2,8 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const API_URL = "http://10.4.230.10:8081/projeto/api/v1/dogFood";
-const ORDER = "http://10.4.230.10:8082/projeto/api/v1/order;";
+const API_URL = "http://localhost:8080/projeto/api/v1/dogFood";
+const ORDER = "http://localhost:8082/projeto/api/v1/order;";
 
 function Products() {
   const location = useLocation();
@@ -378,7 +378,7 @@ function Products() {
             <p className="text-white text-center">Nenhum produto cadastrado.</p>
         ) : (
           <div className="table-responsive"> {/* Adicionado para tabelas em telas pequenas */}
-              <table className="table table-dark table-striped table-hover"> {/* Melhorias visuais na tabela */}
+              <table className="table table-dark table-striped table-hover">
                   <thead>
                       <tr className='text-white text-center'>
                           <th>Nome</th>
@@ -397,8 +397,8 @@ function Products() {
                               <td>{product.name}</td>
                               <td>{product.type}</td>
                               <td>{product.description}</td>
-                              <td>R$ {parseFloat(product.price).toFixed(2)}</td> {/* Formata preço */}
-                              <td>{parseFloat(product.weight).toFixed(3)} kg</td> {/* Formata peso */}
+                              <td>R$ {parseFloat(product.price).toFixed(2)}</td>{/* Formata preço */}
+                              <td>{parseFloat(product.weight).toFixed(3)} kg</td>{/* Formata peso */}
                               <td>{product.availability ? "✅ Sim" : "❌ Não"}</td>
                               <td>
                                   <div className="btn-group btn-group-sm" role="group" aria-label="Ações do Produto">
@@ -411,12 +411,8 @@ function Products() {
                                   </div>
                               </td>
                               <td>
-                                <button className="btn btn-info" onClick={() => addCart(product)} >
-                                  🛒 Add
-                                </button><br/>
-                                <button className="btn btn-danger" onClick={() => removeCart(product.id)} >
-                                  🛒 Remover
-                                </button>
+                                <button className="btn btn-info" onClick={() => addCart(product)} >🛒 Add</button>
+                                <button className="btn btn-danger" onClick={() => removeCart(product.id)} >🛒 Remover</button>
                               </td>
                           </tr>
                       ))}
